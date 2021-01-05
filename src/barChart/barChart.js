@@ -10,7 +10,18 @@ class BarChart extends Component {
 
   render() {
     this.fillArray();
-    return <div>{this.timesArray.map(el => <div className='data' style={{width: el, backgroundColor: 'red', height: 50, marginBottom: 10}}></div>)}</div>
+    const sortedArray = [...this.timesArray];
+    sortedArray.sort((a, b) => a - b);
+    return <div className='container'>
+        <div className='meter' style={{width: sortedArray[sortedArray.length - 1]/10 + '%'}}>
+          <div>0</div>
+          <div style={{marginLeft: '25%'}}>{sortedArray[2]}</div>
+          <div style={{marginLeft: '50%'}}>{sortedArray[4]}</div>
+          <div style={{marginLeft: '75%'}}>{sortedArray[7]}</div>
+          <div style={{marginLeft: '100%'}}>{sortedArray[9]}</div>
+        </div>
+        {this.timesArray.map(el => <div className='data' style={{width: el/10 + '%', backgroundColor: 'red', height: 50, marginBottom: 10}}></div>)}
+      </div>
   }
 
   fillArray() {
