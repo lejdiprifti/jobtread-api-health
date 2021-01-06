@@ -6,30 +6,35 @@ class BarChart extends Component {
   constructor() {
     super()
     this.timesArray = [];
+    this.state = {
+      timesArray: []
+    }
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.fillArray(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
-    this.fillArray();
-    const sortedArray = [...this.timesArray];
-    sortedArray.sort((a, b) => a - b);
     return <div className='container'>
-        <div className='meter' style={{width: sortedArray[sortedArray.length - 1]/10 + '%'}}>
-          <div>0</div>
-          <div style={{marginLeft: '25%'}}>{sortedArray[2]}</div>
-          <div style={{marginLeft: '50%'}}>{sortedArray[4]}</div>
-          <div style={{marginLeft: '75%'}}>{sortedArray[7]}</div>
-          <div style={{marginLeft: '100%'}}>{sortedArray[9]}</div>
-        </div>
-        {this.timesArray.map(el => <div className='data' style={{width: el/10 + '%', backgroundColor: 'red', height: 50, marginBottom: 10}}></div>)}
+        {this.state.timesArray.map(el => <div>{el + 'ms'}<div className='data' style={{width: el/10 + '%', backgroundColor: 'red', height: 50, marginBottom: 10}}></div>
+        </div>)}
       </div>
   }
 
   fillArray() {
-    const time = this.getRequestTimeInMilliseconds()
+    const time = this.getRequestTimeInMilliseconds();
     this.timesArray.push(time)
     if (this.timesArray.length === 11) {
       this.timesArray = this.timesArray.slice(1);
     }
+    this.setState({
+      timesArray: this.timesArray
+    });
   }
 
   getRequestTimeInMilliseconds() {

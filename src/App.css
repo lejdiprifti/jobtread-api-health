@@ -2,12 +2,3 @@
   padding-top: 3%;
   padding-left: 3%;
 }
-
-.meter {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.meter div {
-  flex: 1 0 10%;
-}
