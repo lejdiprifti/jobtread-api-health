@@ -21,8 +21,10 @@ class BarChart extends Component {
 
   render() {
     return <div className='container'>
-        {this.state.timesArray.map(el => <div>{el + 'ms'}<div className='data' style={{width: el/10 + '%', backgroundColor: 'red', height: 50, marginBottom: 10}}></div>
-        </div>)}
+      <table>
+        {this.state.timesArray.map(el => <tr><td>{el + 'ms'}</td><td className='data'><div style={{width: el/10 + '%', backgroundColor: 'red', height: 50, marginBottom: 10}}></div></td>
+        </tr>)}
+        </table>
       </div>
   }
 
